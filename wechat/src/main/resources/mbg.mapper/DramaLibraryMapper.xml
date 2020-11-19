@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wechat.mbg.mapper.DramaLibraryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="wechat.mbg.entity.DramaLibrary">
+        <id column="id" property="id" />
+        <result column="drama_name" property="dramaName" />
+        <result column="drama_Introduction" property="dramaIntroduction" />
+        <result column="drama_image" property="dramaImage" />
+        <result column="price" property="price" />
+        <result column="number_require" property="numberRequire" />
+        <result column="isdeleted" property="isdeleted" />
+        <result column="on_shelf" property="onShelf" />
+        <result column="creation_date" property="creationDate" />
+        <result column="update_date" property="updateDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, drama_name, drama_Introduction, drama_image, price, number_require, isdeleted, on_shelf, creation_date, update_date
+    </sql>
+
+</mapper>
