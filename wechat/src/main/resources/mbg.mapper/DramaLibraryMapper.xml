@@ -6,6 +6,11 @@
     <resultMap id="BaseResultMap" type="wechat.mbg.entity.DramaLibrary">
         <id column="id" property="id" />
         <result column="drama_name" property="dramaName" />
+        <result column="script_form" property="scriptForm" />
+        <result column="script_difficulty" property="scriptDifficulty" />
+        <result column="script_background" property="scriptBackground" />
+        <result column="script_type" property="scriptType" />
+        <result column="script_theme" property="scriptTheme" />
         <result column="drama_Introduction" property="dramaIntroduction" />
         <result column="drama_image" property="dramaImage" />
         <result column="price" property="price" />
@@ -14,11 +19,12 @@
         <result column="on_shelf" property="onShelf" />
         <result column="creation_date" property="creationDate" />
         <result column="update_date" property="updateDate" />
+        <result column="statue" property="statue" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, drama_name, drama_Introduction, drama_image, price, number_require, isdeleted, on_shelf, creation_date, update_date
+        id, drama_name, script_form, script_difficulty, script_background, script_type, script_theme, drama_Introduction, drama_image, price, number_require, isdeleted, on_shelf, creation_date, update_date, statue
     </sql>
 
 </mapper>

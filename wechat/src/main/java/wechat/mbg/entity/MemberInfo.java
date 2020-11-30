@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Kevin
- * @since 2020-10-26
+ * @since 2020-11-19
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

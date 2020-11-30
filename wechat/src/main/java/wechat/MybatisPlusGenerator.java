@@ -45,7 +45,7 @@ public class MybatisPlusGenerator {
     /**
      * 要生成的表名
      */
-    private static String[] tables = {"member_info", "drama_library"};
+    private static String[] tables = {};
 
     /** table前缀 */
     // private static String prefix = "bg_";
