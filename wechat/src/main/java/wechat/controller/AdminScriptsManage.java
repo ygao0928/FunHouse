@@ -1,18 +1,15 @@
 package wechat.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import wechat.config.vo.DramaLibraryVO;
+
 import wechat.mbg.entity.DramaLibrary;
 import wechat.mbg.service.DramaLibraryService;
 import wechat.utils.GlobalResult;
-
-import java.util.List;
 
 /**
  * @author Kevin Gao

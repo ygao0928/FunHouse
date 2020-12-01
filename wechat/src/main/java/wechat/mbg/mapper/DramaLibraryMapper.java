@@ -1,9 +1,10 @@
 package wechat.mbg.mapper;
 
 import org.springframework.stereotype.Repository;
-import wechat.config.vo.DramaLibraryVO;
+
 import wechat.mbg.entity.DramaLibrary;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import wechat.vo.DramaLibraryVO;
 
 import java.util.List;
 
@@ -18,6 +19,6 @@ import java.util.List;
 @Repository
 public interface DramaLibraryMapper extends BaseMapper<DramaLibrary> {
 
-    List<DramaLibraryVO> getAll(String keyword);
 
+    List<DramaLibraryVO> getAll(String keyword);
 }

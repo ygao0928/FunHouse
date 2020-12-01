@@ -65,8 +65,9 @@ public class MybatisPlusGenerator {
         String projectPath = System.getProperty("user.dir");
         /** 全局配置 */
         GlobalConfig globalConfig = new GlobalConfig();
-        globalConfig.setOutputDir(projectPath + "/wechat/src/main/java");
-        canonicalPath=projectPath + "/wechat/src/main";
+        //globalConfig.setOutputDir(projectPath + "/wechat/src/main/java");
+        globalConfig.setOutputDir("C:/wechat/src/main");
+        canonicalPath="C:/wechat/src/main";
         System.out.println("生成地址:"+projectPath + "/wechat/src/main/java");
         globalConfig.setFileOverride(true);
         globalConfig.setActiveRecord(true);

@@ -1,9 +1,7 @@
 package wechat.mbg.service;
-
-import wechat.config.vo.DramaLibraryVO;
 import wechat.mbg.entity.DramaLibrary;
 import com.baomidou.mybatisplus.extension.service.IService;
-
+import  wechat.vo.DramaLibraryVO;
 import java.util.List;
 
 /**

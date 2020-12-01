@@ -15,11 +15,12 @@
         <result column="avatar_url" property="avatarUrl" />
         <result column="gender" property="gender" />
         <result column="nick_name" property="nickName" />
+        <result column="phone_number" property="phoneNumber" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        open_id, skey, create_time, last_visit_time, session_key, city, province, country, avatar_url, gender, nick_name
+        open_id, skey, create_time, last_visit_time, session_key, city, province, country, avatar_url, gender, nick_name, phone_number
     </sql>
 
 </mapper>

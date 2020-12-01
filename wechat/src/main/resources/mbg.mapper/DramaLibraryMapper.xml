@@ -26,7 +26,7 @@
     <sql id="Base_Column_List">
         id, drama_name, script_form, script_difficulty, script_background, script_type, script_theme, drama_Introduction, drama_image, price, number_require, isdeleted, on_shelf, creation_date, update_date, statue
     </sql>
-    <select id="getAll" resultType="wechat.config.vo.DramaLibraryVO">
+    <select id="getAll" resultType="wechat.vo.DramaLibraryVO">
 SELECT
 dl.id,
 dl.drama_name,
