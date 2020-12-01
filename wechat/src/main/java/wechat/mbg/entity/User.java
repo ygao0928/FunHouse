@@ -80,6 +80,10 @@ public class User implements Serializable {
      * 网名
      */
     private String nickName;
+    /**
+     * 电话号码
+     */
+    private String phoneNumber;
 
 
 }

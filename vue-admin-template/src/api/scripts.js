@@ -1,11 +1,20 @@
 import request from '@/utils/request'
 
-export function getList() {
+export function getList(data) {
   return request({
     url: '/admin/scripts/getList',//logintest /admin/auth/login
     method: 'post'
   })
 }
+export function addScriptFrom(data) {
+  return request({
+    url: '/admin/scripts/addDrama',//logintest /admin/auth/login
+    method: 'post',
+    data
+  })
+}
+
+
 export function getScriptBackgroundLibrary() {
   return request({
     url: '/admin/baseData/getScriptBackgroundLibrary',//logintest /admin/auth/login

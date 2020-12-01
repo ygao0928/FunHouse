@@ -3,15 +3,15 @@ package wechat.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import wechat.mbg.entity.*;
 import wechat.mbg.service.*;
+import wechat.utils.FileUploadUtils;
 import wechat.utils.GlobalResult;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Kevin Gao
@@ -36,7 +36,13 @@ public class BaseDataController {
     private ScriptThemeLibraryService scriptThemeLibraryService;
     @Autowired
     private ScriptTypeLibraryService scriptTypeLibraryService;
-
+    @PostMapping("/fileUpLoad")
+    @ApiOperation("上传文件接口")
+    public GlobalResult fileUpLoad(MultipartFile file) {
+        //上传后获取上传存放的物理物理路径给前端
+        Map<String, Object> upload = FileUploadUtils.upload(file);
+        return GlobalResult.ok(upload);
+    }
     @GetMapping("/getScriptBackgroundLibrary")
     @ApiOperation("获取剧本背景库数据")
     public GlobalResult getScriptBackgroundLibrary() {

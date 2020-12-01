@@ -1,12 +1,13 @@
 package wechat.mbg.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import wechat.config.vo.DramaLibraryVO;
 import wechat.mbg.entity.DramaLibrary;
 import wechat.mbg.mapper.DramaLibraryMapper;
 import wechat.mbg.service.DramaLibraryService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
@@ -24,13 +25,14 @@ public class DramaLibraryServiceImpl extends ServiceImpl<DramaLibraryMapper, Dra
 @Autowired
 private DramaLibraryMapper dramaLibraryMapper;
     @Override
-    public List<DramaLibrary> getAll() {
-        return dramaLibraryMapper.selectList(null);
+    public List<DramaLibraryVO> getAll(String key) {
+        return dramaLibraryMapper.getAll(key);
     }
 @Transactional(rollbackFor = Exception.class)
     @Override
     public Boolean addDrama(DramaLibrary dramaLibrary) {
     dramaLibrary.setCreationDate(new Date());
+    dramaLibrary.setDeleteFlage(0);
     int i = dramaLibraryMapper.insert(dramaLibrary);
     return i==0?false:true;
     }

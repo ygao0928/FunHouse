@@ -15,7 +15,7 @@
         <result column="drama_image" property="dramaImage" />
         <result column="price" property="price" />
         <result column="number_require" property="numberRequire" />
-        <result column="isdeleted" property="isdeleted" />
+        <result column="delete_flage" property="deleteFlage" />
         <result column="on_shelf" property="onShelf" />
         <result column="creation_date" property="creationDate" />
         <result column="update_date" property="updateDate" />
@@ -26,5 +26,33 @@
     <sql id="Base_Column_List">
         id, drama_name, script_form, script_difficulty, script_background, script_type, script_theme, drama_Introduction, drama_image, price, number_require, isdeleted, on_shelf, creation_date, update_date, statue
     </sql>
+    <select id="getAll" resultType="wechat.config.vo.DramaLibraryVO">
+SELECT
+dl.id,
+dl.drama_name,
+dl.drama_image,
+dl.drama_image,
+dl.price,
+dl.creation_date,
+dl.number_require,
+dl.public_link,
+dl.statue,
+bl.script_background,
+diff.degree_difficulty,
+fl.scriptForm,
+tl.script_theme,
+ty.script_type
+FROM
+drama_library dl LEFT JOIN script_background_library bl ON dl.script_background=bl.id
+LEFT JOIN script_difficulty_library diff ON diff.id=dl.script_difficulty
+LEFT JOIN script_form_library fl ON fl.id=dl.script_form
+LEFT JOIN script_theme_library tl ON tl.id=dl.script_theme
+LEFT JOIN script_type_library ty ON ty.id=dl.script_type
+WHERE dl.delete_flage=0
+ <if test="keyword != null and '' != keyword">
+     AND dl.drama_name like concat('%' ,#{keyword},'%')
+ </if>
+
+    </select>
 
 </mapper>

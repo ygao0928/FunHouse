@@ -1,10 +1,13 @@
 package wechat.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import wechat.config.vo.DramaLibraryVO;
 import wechat.mbg.entity.DramaLibrary;
 import wechat.mbg.service.DramaLibraryService;
 import wechat.utils.GlobalResult;
@@ -29,9 +32,12 @@ public class AdminScriptsManage {
 
     @PostMapping("/getList")
     @ApiOperation("获取剧本的列表")
-    public GlobalResult getList() {
-        List<DramaLibrary> dramaLibraries = dramaLibraryService.getAll();
-        return GlobalResult.ok(dramaLibraries);
+    public GlobalResult getList(@RequestParam(defaultValue = "1") int pageNum,
+                                @RequestParam(defaultValue = "10") int pageSize,
+                                 String key) {
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo pageInfo = new PageInfo(dramaLibraryService.getAll(key));
+        return GlobalResult.ok(pageInfo);
     }
 
     @PostMapping("/addDrama")
@@ -40,6 +46,7 @@ public class AdminScriptsManage {
         Boolean flag = dramaLibraryService.addDrama(dramaLibrary);
         GlobalResult result = new GlobalResult();
         result.setMsg("操作成功");
+        result.setStatus(200);
         return result;
     }
 }

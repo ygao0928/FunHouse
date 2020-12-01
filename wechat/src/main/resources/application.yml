@@ -27,6 +27,13 @@ spring:
     time-zone: GMT+8
     serialization:
       write-dates-as-timestamps: false
+  servlet:
+    multipart:
+      max-file-size: 30MB #最大文件上传
+      max-request-size: 30MB
+      maxRequestSize: 50MB
+  web:
+    upload-path: D:/fileupload
 mconfig:
   swagger-ui-open: true
 mybatis-plus:
@@ -47,3 +54,8 @@ mybatis-plus:
       logic-not-delete-value: 1
       # 删除后
       logic-delete-value: 0
+pagehelper:
+  helper-dialect: mysql
+  params: count=countSql
+  reasonable: true
+  support-methods-arguments: true
