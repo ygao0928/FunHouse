@@ -112,7 +112,11 @@ public class DramaLibrary implements Serializable {
     /**
      * 状态
      */
-    private String statue;
+    private String status;
 
+    /**
+     * 使用次数
+     */
+    private String counts;
 
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import wechat.mbg.entity.DramaLibrary;
+import wechat.mbg.entity.MemberInfo;
 import wechat.mbg.mapper.DramaLibraryMapper;
 import wechat.mbg.service.DramaLibraryService;
 import wechat.vo.DramaLibraryVO;
@@ -36,5 +37,11 @@ private DramaLibraryMapper dramaLibraryMapper;
     dramaLibrary.setDeleteFlage(0);
     int i = dramaLibraryMapper.insert(dramaLibrary);
     return i==0?false:true;
+    }
+
+    //获取前10充值排行剧本
+    @Override
+    public List<MemberInfo> showTopTenScripts() {
+        return null;
     }
 }

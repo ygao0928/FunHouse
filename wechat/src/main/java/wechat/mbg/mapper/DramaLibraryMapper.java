@@ -21,4 +21,6 @@ public interface DramaLibraryMapper extends BaseMapper<DramaLibrary> {
 
 
     List<DramaLibraryVO> getAll(String keyword);
+    //获取前10充值排行剧本
+    List<DramaLibrary> showTopTenScripts();
 }

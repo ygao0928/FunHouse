@@ -74,6 +74,9 @@ public class WXLoginController {
             String city = rawDataJson.getString("city");
             String country = rawDataJson.getString("country");
             String province = rawDataJson.getString("province");
+            String balance = rawDataJson.getString("balance");
+            String totalcost = rawDataJson.getString("totalcost");
+            String totalrecharge = rawDataJson.getString("totalrecharge");
             user = new User();
             user.setOpenId(openid);
             user.setSkey(skey);
