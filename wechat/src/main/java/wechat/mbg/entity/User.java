@@ -1,5 +1,6 @@
 package wechat.mbg.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 import java.util.Date;
@@ -84,6 +85,9 @@ public class User implements Serializable {
      * 电话号码
      */
     private String phoneNumber;
+
+
+
 
 
 }

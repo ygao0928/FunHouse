@@ -1,8 +1,11 @@
 package wechat.mbg.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import wechat.mbg.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +17,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 @Repository
 public interface UserMapper extends BaseMapper<User> {
-
+    //查询所有用户或者根据手机号模糊查询
+    List<User> selectAll(@Param("key")String key);
+    //查询所有用户信息
+    List<User> selectAllUsers();
 }

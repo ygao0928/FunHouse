@@ -16,11 +16,25 @@
         <result column="gender" property="gender" />
         <result column="nick_name" property="nickName" />
         <result column="phone_number" property="phoneNumber" />
+
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        open_id, skey, create_time, last_visit_time, session_key, city, province, country, avatar_url, gender, nick_name, phone_number
+        open_id, skey, create_time, last_visit_time, session_key, city, province, country, avatar_url, gender, nick_name,
+        phone_number
     </sql>
+    <select id="selectAll" resultType="wechat.mbg.entity.User">
+        select * from user
+        where 1=1
+        and
+        <if test="key!=null and '' != key">
+            phone_number like '%'#{key}+'%'
+        </if>
+        order by create_time
+    </select>
+    <select id="selectAllUsers" resultType="wechat.mbg.entity.User">
+        select * from user
+    </select>
 
 </mapper>
