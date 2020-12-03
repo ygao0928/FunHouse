@@ -27,7 +27,7 @@ public class AdminScriptsManage {
     @Autowired
     private DramaLibraryService dramaLibraryService;
 
-    @PostMapping("/getList")
+    @GetMapping("/getList")
     @ApiOperation("获取剧本的列表")
     public GlobalResult getList(@RequestParam(defaultValue = "1") int pageNum,
                                 @RequestParam(defaultValue = "10") int pageSize,
