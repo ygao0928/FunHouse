@@ -34,7 +34,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public PageResult showWeChatUsers(PageRequest pageRequest) {
         PageUtils.getPage(pageRequest);
         //查询微信用户列表
-        List<User> users = userMapper.selectAll(pageRequest.getKey());
+        List<User> users = userMapper.selectAll(null);
         return PageUtils.getPageResult(new PageInfo<>(users));
     }
 }

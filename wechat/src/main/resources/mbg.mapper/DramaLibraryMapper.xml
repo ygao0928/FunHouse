@@ -39,7 +39,7 @@ dl.number_require,
 dl.public_link,
 dl.status,
 bl.script_background,
-diff.degree_difficulty,
+diff.degree_difficulty as scriptDifficulty,
 fl.scriptForm,
 tl.script_theme,
 ty.script_type
