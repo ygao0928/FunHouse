@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wechat.mbg.mapper.DramaLibraryMapper">
-
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="wechat.mbg.entity.DramaLibrary">
         <id column="id" property="id" />
@@ -23,41 +22,73 @@
         <result column="counts" property="counts" />
     </resultMap>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, drama_name, script_form, script_difficulty, script_background, script_type, script_theme, drama_Introduction, drama_image, price, number_require, isdeleted, on_shelf, creation_date, update_date, status ,counts
-    </sql>
-    <select id="getAll" resultType="wechat.vo.DramaLibraryVO">
-SELECT
-dl.id,
-dl.drama_name,
-dl.drama_image,
-dl.drama_image,
-dl.price,
-dl.creation_date,
-dl.number_require,
-dl.public_link,
-dl.status,
-bl.script_background,
-diff.degree_difficulty as scriptDifficulty,
-fl.scriptForm,
-tl.script_theme,
-ty.script_type
-FROM
-drama_library dl LEFT JOIN script_background_library bl ON dl.script_background=bl.id
-LEFT JOIN script_difficulty_library diff ON diff.id=dl.script_difficulty
-LEFT JOIN script_form_library fl ON fl.id=dl.script_form
-LEFT JOIN script_theme_library tl ON tl.id=dl.script_theme
-LEFT JOIN script_type_library ty ON ty.id=dl.script_type
-WHERE dl.delete_flage=0
- <if test="keyword != null and '' != keyword">
-     AND dl.drama_name like concat('%' ,#{keyword},'%')
- </if>
+    <select id="getAll"  resultType="wechat.vo.DramaLibraryVO">
+        SELECT
+        dl.id,
+        dl.drama_name,
+        dl.drama_image,
+        dl.drama_image,
+        dl.price,
+        dl.public_link,
+        dl.creation_date,
+        dl.number_require,
+        dl.public_link,
+        dl.status,
+        bl.script_background,
+        diff.degree_difficulty as scriptDifficulty,
+        fl.scriptForm,
+        tl.script_theme,
+        ty.script_type
+        FROM
+        drama_library dl LEFT JOIN script_background_library bl ON dl.script_background=bl.id
+        LEFT JOIN script_difficulty_library diff ON diff.id=dl.script_difficulty
+        LEFT JOIN script_form_library fl ON fl.id=dl.script_form
+        LEFT JOIN script_theme_library tl ON tl.id=dl.script_theme
+        LEFT JOIN script_type_library ty ON ty.id=dl.script_type
+        WHERE dl.delete_flage=0
+        <if test="key != null and '' != key">
+            AND dl.drama_name like concat('%' ,#{key},'%')
+        </if>
+        <if test="fromId != null and '' != fromId">
+            AND dl.script_form like concat('%' ,#{fromId},'%')
+        </if>
+        <if test="diffId != null and '' != diffId">
+            AND dl.script_difficulty like concat('%' ,#{diffId},'%')
+        </if>
+        <if test="numberRe != null and '' != numberRe">
+            AND dl.number_require like concat('%' ,#{numberRe},'%')
+        </if>
+        <if test="backId != null and '' != backId">
+            AND bl.script_background like concat('%' ,#{backId},'%')
+        </if>
+        <if test="typeId != null and '' != typeId">
+            AND dl.script_type like concat('%' ,#{typeId},'%')
+        </if>
 
     </select>
-    <!--获取前10充值排行剧本-->
-    <select id="showTopTenScripts" resultType="wechat.mbg.entity.DramaLibrary">
-        select top 10 * from drama_library order by counts desc
+    <select id="getDramaDetailById" resultType="wechat.vo.DramaLibraryVO">
+        SELECT
+            dl.id,
+            dl.drama_name,
+            dl.drama_image,
+            dl.drama_image,
+            dl.price,
+            dl.public_link,
+            dl.creation_date,
+            dl.number_require,
+            dl.public_link,
+            dl.status,
+            bl.script_background,
+            diff.degree_difficulty as scriptDifficulty,
+            fl.scriptForm,
+            tl.script_theme,
+            ty.script_type
+        FROM
+            drama_library dl LEFT JOIN script_background_library bl ON dl.script_background=bl.id
+                             LEFT JOIN script_difficulty_library diff ON diff.id=dl.script_difficulty
+                             LEFT JOIN script_form_library fl ON fl.id=dl.script_form
+                             LEFT JOIN script_theme_library tl ON tl.id=dl.script_theme
+                             LEFT JOIN script_type_library ty ON ty.id=dl.script_type
+        WHERE dl.id=#{id}
     </select>
-
 </mapper>

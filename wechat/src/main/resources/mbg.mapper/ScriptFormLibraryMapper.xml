@@ -2,16 +2,4 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wechat.mbg.mapper.ScriptFormLibraryMapper">
 
-    <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="wechat.mbg.entity.ScriptFormLibrary">
-        <id column="id" property="id" />
-        <result column="scriptForm" property="scriptForm" />
-        <result column="delete_flage" property="deleteFlage" />
-    </resultMap>
-
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, scriptForm, delete_flage
-    </sql>
-
 </mapper>

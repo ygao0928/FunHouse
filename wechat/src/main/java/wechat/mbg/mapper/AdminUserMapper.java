@@ -1,6 +1,5 @@
 package wechat.mbg.mapper;
 
-import org.springframework.stereotype.Repository;
 import wechat.mbg.entity.AdminUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -10,9 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author Kevin
- * @since 2020-11-25
+ * @since 2020-12-14
  */
-@Repository
 public interface AdminUserMapper extends BaseMapper<AdminUser> {
 
 }

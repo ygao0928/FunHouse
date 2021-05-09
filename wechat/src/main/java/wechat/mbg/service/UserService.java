@@ -2,8 +2,8 @@ package wechat.mbg.service;
 
 import wechat.mbg.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
-import wechat.utils.PageRequest;
-import wechat.utils.PageResult;
+
+import java.util.List;
 
 /**
  * <p>
@@ -11,11 +11,16 @@ import wechat.utils.PageResult;
  * </p>
  *
  * @author Kevin
- * @since 2020-11-19
+ * @since 2020-12-14
  */
 public interface UserService extends IService<User> {
 
-    //微信用户列表展示
-    PageResult showWeChatUsers(PageRequest pageRequest);
+    List<User> getUserByPhone(String phone);
+
+    /**
+     * 查询所有的用户
+     * @return
+     */
+    List<User> getAllUserList(String key);
 
 }

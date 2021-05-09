@@ -1,26 +1,18 @@
 package wechat.mbg.mapper;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import wechat.mbg.entity.Coupon;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-import java.util.List;
-
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author Kevin
+ * @since 2020-12-14
+ */
 @Repository
-public interface CouponMapper {
-    int deleteByPrimaryKey(Integer id);
+public interface CouponMapper extends BaseMapper<Coupon> {
 
-    int insert(Coupon record);
-
-    int insertSelective(Coupon record);
-
-    Coupon selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Coupon record);
-
-    int updateByPrimaryKey(Coupon record);
-    //列表显示优惠券
-    List<Coupon> showCouponsByStatus();
-    //批量新增优惠券
-    int insertCouponInBulk(List<Coupon> couponList);
 }

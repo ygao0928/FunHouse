@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author Kevin
- * @since 2020-11-25
+ * @since 2020-12-14
  */
 public interface AdminUserService extends IService<AdminUser> {
 

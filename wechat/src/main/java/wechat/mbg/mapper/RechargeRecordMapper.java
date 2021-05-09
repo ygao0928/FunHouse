@@ -1,27 +1,18 @@
 package wechat.mbg.mapper;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import wechat.mbg.entity.RechargeRecord;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-import java.util.List;
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author Kevin
+ * @since 2020-12-14
+ */
 @Repository
-public interface RechargeRecordMapper {
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(RechargeRecord record);
-
-    //新增充值
-    Boolean insertSelective(RechargeRecord record);
-
-    RechargeRecord selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(RechargeRecord record);
-
-    int updateByPrimaryKey(RechargeRecord record);
-    //根据用户id显示充值详情
-    List<RechargeRecord> showRechargeByIdInfo(@Param("startTime")String startTime,@Param("endTime")String endTime,@Param("openId")String openId);
-    //列表显示充值记录
-    List<RechargeRecord> showRechargeInfo(@Param("startTime")String startTime,@Param("endTime")String endTime);
+public interface RechargeRecordMapper extends BaseMapper<RechargeRecord> {
 
 }

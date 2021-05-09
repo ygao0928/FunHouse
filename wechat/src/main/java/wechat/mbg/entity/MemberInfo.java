@@ -1,13 +1,14 @@
 package wechat.mbg.entity;
 
+import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
-import java.math.BigDecimal;
-
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -15,88 +16,63 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Kevin
- * @since 2020-11-19
+ * @since 2020-12-13
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+@ApiModel(value="MemberInfo对象", description="")
 public class MemberInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
+      @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    /**
-     * 网名
-     */
+    @ApiModelProperty(value = "网名")
     private String nickName;
 
-    /**
-     * openid
-     */
-    private Integer openId;
+    @ApiModelProperty(value = "openid")
+    private String openId;
 
-    /**
-     * 手机号码
-     */
+    @ApiModelProperty(value = "手机号码")
     private String telephone;
 
     private String appsecret;
 
     private Integer appId;
 
-    /**
-     * 性别
-     */
+    @ApiModelProperty(value = "性别")
     private Integer gender;
 
-    /**
-     * 会员充值等级
-     */
+    @ApiModelProperty(value = "会员充值等级")
     private String memberRechargeLevel;
 
-    /**
-     * 是否是管理员	0:不是管理员	1:是管理员
-     */
+    @ApiModelProperty(value = "是否是管理员	0:不是管理员	1:是管理员")
     private Integer isAdmin;
 
-    /**
-     * 会员玩本次数等级
-     */
-    private Integer memberPlayedLevel;
+    @ApiModelProperty(value = "会员玩本次数级别")
+    private String memberPlayedLevel;
 
-    /**
-     * 余额
-     */
+    @ApiModelProperty(value = "余额")
     private BigDecimal balance;
 
-    /**
-     * 消费总额
-     */
+    @ApiModelProperty(value = "消费总额")
     private BigDecimal totalCost;
 
-    /**
-     * 充值总额
-     */
+    @ApiModelProperty(value = "充值总额")
     private BigDecimal totalRecharge;
 
-    /**
-     * 剩余积分
-     */
+    @ApiModelProperty(value = "剩余积分")
     private Integer remainingPoints;
 
-    /**
-     * 积分总额
-     */
+    @ApiModelProperty(value = "积分总额")
     private Integer totalPoints;
 
-    /**
-     * 玩游戏次数
-     */
+    @ApiModelProperty(value = "玩游戏次数")
     private Integer playedCounts;
-    /**
-     * 会员折扣
-     */
+
+    @ApiModelProperty(value = "会员折扣")
     private Integer memberDiscount;
+
+
 }

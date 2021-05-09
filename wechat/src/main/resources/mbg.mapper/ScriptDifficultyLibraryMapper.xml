@@ -2,16 +2,4 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wechat.mbg.mapper.ScriptDifficultyLibraryMapper">
 
-    <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="wechat.mbg.entity.ScriptDifficultyLibrary">
-        <id column="id" property="id" />
-        <result column="degree_difficulty" property="degreeDifficulty" />
-        <result column="delete_flage" property="deleteFlage" />
-    </resultMap>
-
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, degree_difficulty, delete_flage
-    </sql>
-
 </mapper>

@@ -4,21 +4,26 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import wechat.mbg.entity.User;
 import wechat.mbg.mapper.UserMapper;
 import wechat.utils.GlobalResult;
 import wechat.utils.WechatUtil;
 
-import java.util.Date;
-import java.util.UUID;
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.math.BigDecimal;
+import java.security.AlgorithmParameters;
+
+import java.security.Security;
+import java.util.*;
 
 /**
  * @author Kevin Gao
@@ -74,9 +79,6 @@ public class WXLoginController {
             String city = rawDataJson.getString("city");
             String country = rawDataJson.getString("country");
             String province = rawDataJson.getString("province");
-            String balance = rawDataJson.getString("balance");
-            String totalcost = rawDataJson.getString("totalcost");
-            String totalrecharge = rawDataJson.getString("totalrecharge");
             user = new User();
             user.setOpenId(openid);
             user.setSkey(skey);
@@ -89,9 +91,17 @@ public class WXLoginController {
             user.setAvatarUrl(avatarUrl);
             user.setGender(Integer.parseInt(gender));
             user.setNickName(nickName);
+            user.setTotalPoints(0);
+            user.setPlayedCounts(0);
+            user.setTotalCost(new BigDecimal("0.0"));
+            user.setBalance(new BigDecimal("0.0"));
+            user.setTotalRecharge(new BigDecimal("0.0"));
             this.userMapper.insert(user);
         } else {
             // 已存在，更新用户登录时间
+            user.setSessionKey(sessionKey);
+            user.setNickName(rawDataJson.getString("nickName"));
+            user.setAvatarUrl(rawDataJson.getString("avatarUrl"));
             user.setLastVisitTime(new Date());
             // 重新设置会话skey
             user.setSkey(skey);
@@ -100,7 +110,51 @@ public class WXLoginController {
         //encrypteData比rowData多了appid和openid
         //JSONObject userInfo = WechatUtil.getUserInfo(encrypteData, sessionKey, iv);
         //6. 把新的skey返回给小程序
-        GlobalResult result = GlobalResult.build(200, null, skey);
+        GlobalResult result = GlobalResult.build(200, null, user);
         return result;
+    }
+
+    @ApiOperation(value = "解密手机号")
+    @PostMapping(value = "/getPhone")
+    public GlobalResult getUserPhone(@RequestBody Map map) throws Exception {
+// 被加密的数据
+        byte[] dataByte = Base64.decode(String.valueOf(map.get("encryptedData")));
+        // 加密秘钥
+        byte[] keyByte = Base64.decode(String.valueOf(map.get("sessionKey")));
+        // 偏移量
+        byte[] ivByte = Base64.decode(String.valueOf(map.get("iv")));
+        try {
+            // 如果密钥不足16位，那么就补足.  这个if 中的内容很重要
+            int base = 16;
+            if (keyByte.length % base != 0) {
+                int groups = keyByte.length / base + (keyByte.length % base != 0 ? 1 : 0);
+                byte[] temp = new byte[groups * base];
+                Arrays.fill(temp, (byte) 0);
+                System.arraycopy(keyByte, 0, temp, 0, keyByte.length);
+                keyByte = temp;
+            }
+            // 初始化
+            Security.addProvider(new BouncyCastleProvider());
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            SecretKeySpec spec = new SecretKeySpec(keyByte, "AES");
+            AlgorithmParameters parameters = AlgorithmParameters.getInstance("AES");
+            parameters.init(new IvParameterSpec(ivByte));
+            cipher.init(Cipher.DECRYPT_MODE, spec, parameters);// 初始化
+            byte[] resultByte = cipher.doFinal(dataByte);
+            if (null != resultByte && resultByte.length > 0) {
+                String result = new String(resultByte, "UTF-8");
+                if (result != null) {
+                    System.out.println(JSONObject.parseObject(result));
+                    Map jsonObject = JSONObject.parseObject(result);
+                    User user = userMapper.selectById(map.get("openId").toString());
+                    user.setPhoneNumber((jsonObject.get("phoneNumber").toString()));
+                    userMapper.updateById(user);
+                    return GlobalResult.ok(user);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

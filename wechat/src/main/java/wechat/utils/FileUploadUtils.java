@@ -21,6 +21,8 @@ import java.util.Map;
 @Slf4j
 public class FileUploadUtils {
 
+    private static   String uploadPath="/workspace/funhouse/fileupload/file/";
+    private  static String sonPath="/file/";
     //获取主机端口
     private static String post = "8080";
     //获取本机ip
@@ -28,12 +30,12 @@ public class FileUploadUtils {
     //远程Ip
     /*private static String host = "112.80.41.34";*/
 
-    //图片存放根路径
-    private static String rootPath = "D:/fileupload";
-    //图片存放根目录下的子目录
-    private static String sonPath = "/file/";
 
-
+    /**
+     *
+     * @param file
+     * @return
+     */
     //文件上传
     public static Map<String,Object> upload(MultipartFile file) {
         Map<String,Object> result=new HashMap<>();
@@ -56,7 +58,7 @@ public class FileUploadUtils {
             log.info("文件后缀名：" + suffixName);
             fileName = formatDate + suffixName;
             //设置文件存储路径,写入的路径
-            String filePath = rootPath + sonPath;
+            String filePath = uploadPath;
             File dest = new File(filePath + fileName);
             //数据库存储的路径总路径 ip+端口+文件名
             //String path = (host + ":" + post + sonPath + fileName);

@@ -1,28 +1,31 @@
 package wechat.mbg.service;
 
-
+import org.springframework.transaction.annotation.Transactional;
 import wechat.mbg.entity.RechargeRecord;
-import wechat.utils.PageRequest;
-import wechat.utils.PageResult;
+import com.baomidou.mybatisplus.extension.service.IService;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
- * @author 杨阳
- * @since 2020-12-02
+ * @author Kevin
+ * @since 2020-12-14
  */
-public interface RechargeRecordService {
+public interface RechargeRecordService extends IService<RechargeRecord> {
+    @Transactional
+    Boolean insert(String phone, Integer money);
 
-    //根据用户id显示充值详情
-    PageResult showRechargeByIdInfo(PageRequest pageRequest, String openId);
-
-    //列表显示充值记录
-    PageResult showRechargeInfo(PageRequest pageRequest);
-    //新增充值
-    Map<String,Object> addRecharge(RechargeRecord rechargeRecord);
+    /**
+     * 后台生成消费记录
+     * @param phone
+     * @param money
+     * @param payMethod
+     * @return
+     */
+    @Transactional
+    String generatorConsumption(String phone, Integer money, Integer payMethod, List<Integer> ids);
 
 }

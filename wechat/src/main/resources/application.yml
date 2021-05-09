@@ -2,10 +2,10 @@ server:
   port: 8080
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver  #47.100.3.219:3306
     url: jdbc:mysql://47.100.3.219:3306/funhouse?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: 123456
+    password: Pass1Word2@...
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
     filters: stat
@@ -32,10 +32,13 @@ spring:
       max-file-size: 30MB #最大文件上传
       max-request-size: 30MB
       maxRequestSize: 50MB
-  web:
-    upload-path: D:/fileupload
-mconfig:
-  swagger-ui-open: true
+# /workspace/funhouse/fileupload/file
+file:
+  #服务器地址
+  uploadurl: "/workspace/funhouse/fileupload/file/"
+  sonPath: "/file/"
+  #本地地址
+  #localurl: "D:/springbootFile/upload/images/"
 mybatis-plus:
   configuration:
     logic-delete-field: deleteFlage  # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
@@ -51,11 +54,13 @@ mybatis-plus:
     # 逻辑删除配置
     db-config:
       # 删除前
-      logic-not-delete-value: 1
+      logic-not-delete-value: 0
       # 删除后
-      logic-delete-value: 0
+      logic-delete-value: 1
 pagehelper:
   helper-dialect: mysql
   params: count=countSql
   reasonable: true
   support-methods-arguments: true
+logging:
+  config: classpath:logback-spring.xml
